@@ -1,77 +1,80 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 1
+      Crear un nuevo producto
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-card-content>
+      <form [formGroup]="form" (ngSubmit)="guardarProducto()" novalidate>
+        <ion-list>
 
+          <ion-item>
+            <ion-label position="floating" color="primary">Código:</ion-label>
+            <ion-input formControlName="codigo"></ion-input>
+          </ion-item>
+          <ion-text color="danger" *ngIf="form.get('codigo')?.errors && form.get('codigo')?.touched">
+            <p *ngIf="form.get('codigo')?.hasError('required')">Es requerido</p>
+          </ion-text>
 
+          <ion-item>
+            <ion-label position="floating" color="primary">Descripción:</ion-label>
+            <ion-input formControlName="descripcion"></ion-input>
+          </ion-item>
+          <ion-text color="danger" *ngIf="form.get('descripcion')?.errors && form.get('descripcion')?.touched">
+            <p *ngIf="form.get('descripcion')?.hasError('required')">Es requerido</p>
+          </ion-text>
 
-  <ion-card-content>
-    <form [formGroup]="form" (ngSubmit)="guardarProducto()" novalidate>
-      <ion-list>
-        
-        <ion-item>
-          <ion-label color="primary" floating>Código: </ion-label>
-          <ion-input formControlName="codigo"></ion-input>
-        </ion-item>
-        <ion-item *ngIf="form.get('codigo').errors && form.get('codigo').touched">
-          <p *ngIf="form.get('codigo').hasError('required')">Es requerido</p>
-        </ion-item>
-        <ion-item>
-          <ion-label color="primary" floating>Descripción: </ion-label>
-          <ion-input formControlName="descripcion"></ion-input>
-        </ion-item>
-        <ion-item *ngIf="form.get('descripcion').errors && form.get('descripcion').touched">
-          <p *ngIf="form.get('descripcion').hasError('required')">Es requerido</p>
-        </ion-item>
+          <ion-item>
+            <ion-label position="floating" color="primary">Valor Unitario:</ion-label>
+            <ion-input formControlName="valor_unitario" type="number"></ion-input>
+          </ion-item>
+          <ion-text color="danger" *ngIf="form.get('valor_unitario')?.errors && form.get('valor_unitario')?.touched">
+            <p *ngIf="form.get('valor_unitario')?.hasError('required')">Es requerido</p>
+          </ion-text>
 
-        <ion-item>
-          <ion-label color="primary" floating>Valor Unitario: </ion-label>
-          <ion-input formControlName="valor_unitario"></ion-input>
-        </ion-item>
-        <ion-item *ngIf="form.get('valor_unitario').errors && form.get('valor_unitario').touched">
-          <p *ngIf="form.get('valor_unitario').hasError('required')">Es requerido</p>
-        </ion-item>
+          <ion-item>
+            <ion-label color="primary">Unidad de Medida:</ion-label>
+            <ion-select formControlName="unidad_medida" placeholder="Seleccione">
+              <ion-select-option value="GRS">GRS</ion-select-option>
+              <ion-select-option value="LTS">LTS</ion-select-option>
+              <ion-select-option value="MLS">MLS</ion-select-option>
+              <ion-select-option value="UND">UND</ion-select-option>
+              <ion-select-option value="PQT">PQT</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-text color="danger" *ngIf="form.get('unidad_medida')?.errors && form.get('unidad_medida')?.touched">
+            <p *ngIf="form.get('unidad_medida')?.hasError('required')">Es requerido</p>
+          </ion-text>
 
-        <ion-item>
-          <ion-label color="primary" floating>Unidad de Medida: </ion-label>    
-          <ion-select placeholder="Seleccione"  formControlName="unidad_medida">
-            <ion-select-option value="GRS">GRS</ion-select-option>
-            <ion-select-option value="MLS">LTS</ion-select-option>
-            <ion-select-option value="UND">MLS</ion-select-option>
-            <ion-select-option value="UND">UND</ion-select-option>
-            <ion-select-option value="UND">PQT</ion-select-option>
-          </ion-select>
-        </ion-item>
-        <ion-item *ngIf="form.get('unidad_medida').errors && form.get('unidad_medida').touched">
-          <p *ngIf="form.get('unidad_medida').hasError('required')">Es requerido</p>
-        </ion-item>
+          <ion-item>
+            <ion-label position="floating" color="primary">Cantidad en Stock:</ion-label>
+            <ion-input formControlName="cantidad_stock" type="number"></ion-input>
+          </ion-item>
+          <ion-text color="danger" *ngIf="form.get('cantidad_stock')?.errors && form.get('cantidad_stock')?.touched">
+            <p *ngIf="form.get('cantidad_stock')?.hasError('required')">Es requerido</p>
+          </ion-text>
 
-        <ion-item>
-          <ion-label color="primary" floating>Cantidad en Stock: </ion-label>
-          <ion-input formControlName="cantidad_stock"></ion-input>
-        </ion-item>
-        <ion-item *ngIf="form.get('cantidad_stock').errors && form.get('cantidad_stock').touched">
-          <p *ngIf="form.get('cantidad_stock').hasError('required')">Es requerido</p>
-        </ion-item>
+          <ion-item>
+            <ion-label color="primary">Categoría:</ion-label>
+            <ion-select formControlName="categoria" placeholder="Seleccione">
+              <ion-select-option value="1">Alimentos</ion-select-option>
+              <ion-select-option value="2">Aseo</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-text color="danger" *ngIf="form.get('categoria')?.errors && form.get('categoria')?.touched">
+            <p *ngIf="form.get('categoria')?.hasError('required')">Es requerido</p>
+          </ion-text>
 
-        <ion-item>
-          <ion-label color="primary" floating>Categoria: </ion-label>    
-          <ion-select placeholder="Seleccione"  formControlName="categoria">
-            <ion-select-option value="1">Alimentos</ion-select-option>
-            <ion-select-option value="2">Aseo</ion-select-option>
-          </ion-select>
-        </ion-item>
-        <ion-item *ngIf="form.get('categoria').errors && form.get('categoria').touched">
-          <p *ngIf="form.get('categoria').hasError('required')">Es requerido</p>
-        </ion-item>
-      </ion-list>
-      <button ion-button block type="submit" [disabled]="form.invalid">Guardar</button>
-     </form>
-  </ion-card-content>
+        </ion-list>
 
+        <ion-button expand="block" type="submit" [disabled]="form.invalid">
+          Guardar
+        </ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
